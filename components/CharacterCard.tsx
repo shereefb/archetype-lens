@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { ARCHETYPES, CATEGORIES, type ArchetypeKey, type Category } from '@/lib/archetypes'
+import { ARCHETYPES, CATEGORIES, getArchetypeUrl, getVirtueUrl, type ArchetypeKey, type Category } from '@/lib/archetypes'
+import { WebViewModal } from './WebViewModal'
 
 interface Character {
   id: string
@@ -31,8 +32,16 @@ const colorClasses: Record<string, string> = {
 
 export function CharacterCard({ character }: CharacterCardProps) {
   const [flipped, setFlipped] = useState(false)
+  const [modalState, setModalState] = useState<{ url: string; title: string } | null>(null)
 
   const category = CATEGORIES[character.source.category]
+
+  const handleBadgeClick = (url: string | null, title: string) => (e: React.MouseEvent) => {
+    e.stopPropagation() // Prevent card flip
+    if (url) {
+      setModalState({ url, title })
+    }
+  }
 
   return (
     <div
@@ -96,14 +105,17 @@ export function CharacterCard({ character }: CharacterCardProps) {
                   const key = archetype.toLowerCase().replace(' ', '_') as ArchetypeKey
                   const data = ARCHETYPES[key]
                   const colorClass = colorClasses[data?.color || 'zinc'] || colorClasses.zinc
+                  const url = getArchetypeUrl(archetype)
 
                   return (
-                    <span
+                    <button
                       key={archetype}
-                      className={`px-3 py-1 rounded-full text-sm font-medium ${colorClass}`}
+                      type="button"
+                      onClick={handleBadgeClick(url, archetype)}
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${colorClass} ${url ? 'hover:ring-2 hover:ring-white/30 transition-all cursor-pointer' : ''}`}
                     >
                       {archetype}
-                    </span>
+                    </button>
                   )
                 })}
               </div>
@@ -115,14 +127,19 @@ export function CharacterCard({ character }: CharacterCardProps) {
                 Pillar Virtues
               </h3>
               <div className="flex flex-wrap gap-2">
-                {character.virtues.map((virtue) => (
-                  <span
-                    key={virtue}
-                    className="px-3 py-1 bg-zinc-800 text-zinc-300 rounded-full text-sm"
-                  >
-                    {virtue}
-                  </span>
-                ))}
+                {character.virtues.map((virtue) => {
+                  const url = getVirtueUrl(virtue)
+                  return (
+                    <button
+                      key={virtue}
+                      type="button"
+                      onClick={handleBadgeClick(url, virtue)}
+                      className={`px-3 py-1 bg-zinc-800 text-zinc-300 rounded-full text-sm ${url ? 'hover:ring-2 hover:ring-white/30 transition-all cursor-pointer' : ''}`}
+                    >
+                      {virtue}
+                    </button>
+                  )
+                })}
               </div>
             </div>
 
@@ -158,6 +175,15 @@ export function CharacterCard({ character }: CharacterCardProps) {
           </div>
         </div>
       </div>
+
+      {/* WebView Modal */}
+      {modalState && (
+        <WebViewModal
+          url={modalState.url}
+          title={modalState.title}
+          onClose={() => setModalState(null)}
+        />
+      )}
     </div>
   )
 }

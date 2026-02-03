@@ -78,15 +78,17 @@ export default async function SourcePage({
       {/* Back button */}
       <Link
         href="/"
-        className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
+        className="inline-flex items-center gap-2 text-zinc-400 hover:text-amber-400 transition-colors"
       >
         <span>←</span>
         <span>Back to Library</span>
       </Link>
 
       <header>
-        <span className="text-3xl mb-2 block">{category.icon}</span>
-        <h1 className="text-2xl font-bold">{source.title}</h1>
+        <h1 className="text-2xl font-bold flex items-center gap-3">
+          <span className="text-3xl">{category.icon}</span>
+          {source.title}
+        </h1>
         <p className="text-zinc-400 text-sm mt-1">
           {category.name} · {characters.length} characters
         </p>
