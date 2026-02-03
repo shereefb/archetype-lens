@@ -56,9 +56,10 @@ export default async function SelectionPage() {
 
           <div className="space-y-3">
             {sources.map((source) => (
-              <div
+              <Link
                 key={source.id}
-                className="flex items-center gap-4 bg-zinc-900 rounded-xl p-4"
+                href={`/source/${source.id}`}
+                className="flex items-center gap-4 bg-zinc-900 hover:bg-zinc-800 rounded-xl p-4 transition-colors"
               >
                 <span className="text-2xl">
                   {CATEGORIES[source.category as Category]?.icon}
@@ -69,7 +70,8 @@ export default async function SelectionPage() {
                     {source.characters?.[0]?.count || 0} characters
                   </p>
                 </div>
-              </div>
+                <span className="text-zinc-600">→</span>
+              </Link>
             ))}
           </div>
         </>
