@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Archetype Lens
+
+A mobile-first web app for learning masculine archetypes through fictional and real characters.
+
+## Concept
+
+Archetype Lens helps users understand the King, Warrior, Magician, and Lover archetypes by analyzing characters from movies, books, history, mythology, and current events.
+
+**The Core Loop:**
+1. Build a **selection** of sources (movies, books, etc.) from the library
+2. Hit **Random** to see a character card (name + image only)
+3. **Guess the archetypes** — solo or discuss with a group
+4. **Tap to reveal** the AI-generated analysis
+5. Learn by comparing your thinking to the analysis
+
+The hidden-then-reveal mechanic turns passive browsing into active learning.
+
+## Features
+
+- **Library Browser** — Browse content by category (Movies, Books, History, Stories, Current Events)
+- **Personal Deck** — Build a selection of sources to study
+- **Random Mode** — Swipeable card stack for studying characters
+- **Request New Content** — AI generates character analyses for any title
+- **Magic Link Auth** — Passwordless login with long session memory
+
+## Tech Stack
+
+- **Frontend:** Next.js 15 (App Router), TypeScript, Tailwind CSS
+- **Backend:** Supabase (Auth, PostgreSQL, Edge Functions)
+- **AI:** Claude API for character analysis generation
+- **Hosting:** Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- Supabase project
+- Claude API key
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.local.example .env.local
+# Edit .env.local with your credentials
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+archetype-lens/
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx           # Library browser
+│   ├── selection/         # User's deck
+│   ├── random/            # Card stack view
+│   ├── request/           # Request new content
+│   ├── source/[id]/       # Source detail
+│   ├── login/             # Magic link auth
+│   └── auth/confirm/      # Auth callback
+├── components/            # React components
+│   ├── CharacterCard.tsx  # Card with reveal mechanic
+│   ├── CardStack.tsx      # Swipeable card stack
+│   └── Navigation.tsx     # Bottom nav
+├── lib/                   # Utilities
+│   ├── supabase/          # Supabase client setup
+│   ├── archetypes.ts      # Archetype system constants
+│   └── selection.ts       # Cookie-based selection
+├── types/                 # TypeScript types
+└── middleware.ts          # Supabase session refresh
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Archetype System
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Based on the King, Warrior, Magician, Lover framework:
 
-## Deploy on Vercel
+**Main Archetypes:**
+- **King** — Order, blessing, providing
+- **Warrior** — Courage, discipline, action
+- **Magician** — Knowledge, transformation, guidance
+- **Lover** — Aliveness, connection, presence
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Sub-Archetypes:** Elder, Visionary, Knight, Explorer, Healer, Guide, Artist, Trickster, and more.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Shadows:** Each archetype has active and passive shadows (e.g., Tyrant/Victim for King).
+
+**Pillar Virtues:** 40 virtues like Power, Vulnerability, Honor, Compassion, Knowledge, Passion.
+
+## Database Schema
+
+- `sources` — Movies, books, historical events, stories
+- `characters` — Characters with archetype analysis
+- `user_selections` — User's selected sources
+- `content_requests` — Tracks AI generation requests
+
+## Contributing
+
+This is part of the Mature Masculine project. See the main repository for contribution guidelines.
+
+## License
+
+Private — Part of the Mature Masculine project.
