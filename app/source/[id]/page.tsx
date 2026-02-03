@@ -4,6 +4,20 @@ import { CATEGORIES, type Category } from '@/lib/archetypes'
 import { CharacterCard } from '@/components/CharacterCard'
 import { AddToSelectionButton } from './AddToSelectionButton'
 
+interface Character {
+  id: string
+  name: string
+  image_url?: string
+  archetypes: string[]
+  virtues: string[]
+  arc_description: string
+  key_moments: { title: string; description: string }[]
+  source: {
+    title: string
+    category: Category
+  }
+}
+
 export default async function SourcePage({
   params,
 }: {
@@ -24,7 +38,7 @@ export default async function SourcePage({
 
   const category = CATEGORIES[source.category as Category]
 
-  const characters = (source.characters || []).map((c: any) => ({
+  const characters: Character[] = (source.characters || []).map((c: any) => ({
     id: c.id,
     name: c.name,
     image_url: c.image_url,
