@@ -1,8 +1,10 @@
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import { CATEGORIES, type Category } from '@/lib/archetypes'
 import { CharacterCard } from '@/components/CharacterCard'
-import { AddToSelectionButton } from './AddToSelectionButton'
+import { SelectionButton } from './SelectionButton'
+import { getSelectionFromCookie } from '@/lib/selection'
 
 interface Character {
   id: string
@@ -36,6 +38,25 @@ export default async function SourcePage({
     notFound()
   }
 
+  // Check if source is in user's selection
+  const { data: { user } } = await supabase.auth.getUser()
+  let isInSelection = false
+
+  if (user) {
+    // Check database for logged-in users
+    const { data: selection } = await supabase
+      .from('user_selections')
+      .select('source_id')
+      .eq('user_id', user.id)
+      .eq('source_id', id)
+      .single()
+    isInSelection = !!selection
+  } else {
+    // Check cookie for anonymous users
+    const cookieSelection = await getSelectionFromCookie()
+    isInSelection = cookieSelection.includes(id)
+  }
+
   const category = CATEGORIES[source.category as Category]
 
   const characters: Character[] = (source.characters || []).map((c: any) => ({
@@ -54,6 +75,15 @@ export default async function SourcePage({
 
   return (
     <div className="space-y-6">
+      {/* Back button */}
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
+      >
+        <span>←</span>
+        <span>Back to Library</span>
+      </Link>
+
       <header>
         <span className="text-3xl mb-2 block">{category.icon}</span>
         <h1 className="text-2xl font-bold">{source.title}</h1>
@@ -62,7 +92,7 @@ export default async function SourcePage({
         </p>
       </header>
 
-      <AddToSelectionButton sourceId={source.id} />
+      <SelectionButton sourceId={source.id} isInSelection={isInSelection} />
 
       <div className="space-y-6">
         {characters.map((character) => (
