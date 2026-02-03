@@ -16,12 +16,16 @@
  *   --model <name>  Claude model: sonnet, opus, haiku (default: sonnet)
  */
 
+import { config } from "dotenv";
 import { createClient } from "@supabase/supabase-js";
 import Anthropic from "@anthropic-ai/sdk";
 import * as fs from "fs";
 import * as path from "path";
 import type { Database } from "../types/database";
 import { ARCHETYPES, VIRTUES } from "../lib/archetypes";
+
+// Load environment variables from .env.local
+config({ path: path.join(__dirname, "..", ".env.local") });
 
 // ============================================================================
 // Configuration
