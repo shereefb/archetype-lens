@@ -421,7 +421,7 @@ function validateAnalysisResult(result: AnalysisResult, characterName: string): 
   }
 
   // Validate archetypes exist in our system
-  const validArchetypes = Object.values(ARCHETYPES).map((a) => a.name);
+  const validArchetypes: string[] = Object.values(ARCHETYPES).map((a) => a.name);
   for (const archetype of result.archetypes) {
     if (!validArchetypes.includes(archetype)) {
       console.warn(`  Warning: Unknown archetype "${archetype}" for ${characterName}`);
