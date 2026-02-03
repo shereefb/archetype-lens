@@ -1,3 +1,9 @@
+---
+version: 1.0.0
+lastUpdated: 2026-02-03
+description: System prompt for character archetype analysis
+---
+
 # Archetype Analysis System Prompt
 
 This prompt is used by the `generate-characters` edge function to analyze characters.

@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       characters: {
         Row: {
+          analysis_prompt_version: string | null
           arc_description: string
           archetypes: Json
           created_at: string | null
@@ -27,6 +28,7 @@ export type Database = {
           virtues: Json
         }
         Insert: {
+          analysis_prompt_version?: string | null
           arc_description: string
           archetypes?: Json
           created_at?: string | null
@@ -38,6 +40,7 @@ export type Database = {
           virtues?: Json
         }
         Update: {
+          analysis_prompt_version?: string | null
           arc_description?: string
           archetypes?: Json
           created_at?: string | null
@@ -151,6 +154,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      analysis_prompts: {
+        Row: {
+          version: string
+          content: string
+          description: string | null
+          created_at: string | null
+          is_active: boolean
+        }
+        Insert: {
+          version: string
+          content: string
+          description?: string | null
+          created_at?: string | null
+          is_active?: boolean
+        }
+        Update: {
+          version?: string
+          content?: string
+          description?: string | null
+          created_at?: string | null
+          is_active?: boolean
+        }
+        Relationships: []
       }
     }
     Views: {
