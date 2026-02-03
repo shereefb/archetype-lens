@@ -1,5 +1,5 @@
 ---
-version: 1.0.0
+version: 1.1.0
 lastUpdated: 2026-02-03
 description: System prompt for character archetype analysis
 ---
@@ -109,16 +109,28 @@ For each character:
 3. **Write a 2-5 sentence arc description** focusing on their archetypal journey
 4. **Identify 2-5 key moments** that demonstrate these archetypes in action
 
-### CRITICAL: Shadow Requirement
+### CRITICAL: Shadow Requirement (MANDATORY - DO NOT SKIP)
 
-**Every character MUST have at least one shadow archetype.** No character is purely mature—everyone has blindspots, imbalances, or moments where they fall into shadow. Even heroic characters struggle with:
-- A virtue they overuse (active shadow)
-- A virtue they neglect (passive shadow)
-- A pattern they fall into under stress
+⚠️ **EVERY CHARACTER MUST HAVE AT LEAST ONE SHADOW ARCHETYPE. THIS IS NON-NEGOTIABLE.**
 
-**WRONG:** `["Knight", "Caregiver"]` - No shadow present
-**RIGHT:** `["Knight", "Caregiver", "Martyr"]` - Shows the Caregiver's shadow side
-**RIGHT:** `["Guide", "Visionary", "Dreamer"]` - Guide with Visionary's active shadow (parent included)
+Before submitting your analysis, VERIFY that at least one archetype in your list is a shadow (gray/zinc color - see tables above for shadow names like Tyrant, Martyr, Bully, Know-it-all, etc.).
+
+No character is purely mature—everyone has blindspots, imbalances, or moments where they fall into shadow:
+- **Heroes** struggle with shadows under stress, when their virtues become imbalanced
+- **Mentors** have blindspots where they over-rely on one pillar
+- **Historical figures** are human and have documented flaws
+- **Even the most admirable characters** tip into shadow at some point
+
+**INVALID (will be rejected):**
+- `["Knight", "Caregiver"]` - NO SHADOW PRESENT - REJECTED
+- `["King", "Warrior", "Peacemaker"]` - NO SHADOW PRESENT - REJECTED
+- `["Explorer", "Guide", "Artist"]` - NO SHADOW PRESENT - REJECTED
+
+**VALID:**
+- `["Knight", "Caregiver", "Martyr"]` - Martyr is Caregiver's passive shadow ✓
+- `["King", "Warrior", "Bully"]` - Bully is Warrior's active shadow ✓
+- `["Guide", "Visionary", "Dreamer"]` - Dreamer is Visionary's active shadow ✓
+- `["Explorer", "Knight", "Orphan"]` - Orphan is Explorer's active shadow ✓
 
 For villains, shadow archetypes should typically come FIRST as they are the dominant expression.
 

@@ -1,7 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useMemo } from 'react'
-import TinderCard from 'react-tinder-card'
+import { useState } from 'react'
 import { CharacterCard } from './CharacterCard'
 
 interface Character {
@@ -24,78 +23,62 @@ interface CardStackProps {
 }
 
 export function CardStack({ characters, onEmpty }: CardStackProps) {
-  const [currentIndex, setCurrentIndex] = useState(characters.length - 1)
-  const currentIndexRef = useRef(currentIndex)
+  const [currentIndex, setCurrentIndex] = useState(0)
 
-  const childRefs = useMemo(
-    () => Array(characters.length).fill(0).map(() => React.createRef<any>()),
-    [characters.length]
-  )
+  const currentCharacter = characters[currentIndex]
+  const canGoNext = currentIndex < characters.length - 1
+  const canGoPrev = currentIndex > 0
 
-  const updateCurrentIndex = (val: number) => {
-    setCurrentIndex(val)
-    currentIndexRef.current = val
-  }
-
-  const canSwipe = currentIndex >= 0
-
-  const swiped = (direction: string, index: number) => {
-    updateCurrentIndex(index - 1)
-    if (index === 0 && onEmpty) {
+  const goNext = () => {
+    if (canGoNext) {
+      setCurrentIndex(currentIndex + 1)
+    } else if (onEmpty) {
       onEmpty()
     }
   }
 
-  const swipe = async (dir: 'left' | 'right') => {
-    if (canSwipe && currentIndex < characters.length) {
-      await childRefs[currentIndex].current?.swipe(dir)
+  const goPrev = () => {
+    if (canGoPrev) {
+      setCurrentIndex(currentIndex - 1)
     }
+  }
+
+  if (!currentCharacter) {
+    return (
+      <div className="relative h-[600px] w-full max-w-sm mx-auto flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-zinc-400 text-lg">No more characters!</p>
+          <p className="text-zinc-500 text-sm mt-2">Add more sources to your selection</p>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className="relative h-[600px] w-full max-w-sm mx-auto">
-      {/* Card stack */}
+      {/* Single card display */}
       <div className="absolute inset-0">
-        {characters.map((character, index) => (
-          <TinderCard
-            ref={childRefs[index]}
-            key={character.id}
-            onSwipe={(dir) => swiped(dir, index)}
-            preventSwipe={['up', 'down']}
-            className="absolute w-full"
-          >
-            <CharacterCard character={character} />
-          </TinderCard>
-        ))}
+        <CharacterCard key={currentCharacter.id} character={currentCharacter} />
       </div>
 
-      {/* Swipe buttons */}
+      {/* Navigation buttons */}
       <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-4">
         <button
-          onClick={() => swipe('left')}
-          disabled={!canSwipe}
-          className="w-14 h-14 rounded-full bg-zinc-800 text-white flex items-center justify-center disabled:opacity-50"
+          type="button"
+          onClick={goPrev}
+          disabled={!canGoPrev}
+          className="w-14 h-14 rounded-full bg-zinc-800 text-white flex items-center justify-center disabled:opacity-30 hover:bg-zinc-700 transition-colors"
         >
           ←
         </button>
         <button
-          onClick={() => swipe('right')}
-          disabled={!canSwipe}
-          className="w-14 h-14 rounded-full bg-zinc-800 text-white flex items-center justify-center disabled:opacity-50"
+          type="button"
+          onClick={goNext}
+          className="w-14 h-14 rounded-full bg-zinc-800 text-white flex items-center justify-center hover:bg-zinc-700 transition-colors"
         >
           →
         </button>
       </div>
-
-      {/* Empty state */}
-      {!canSwipe && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <p className="text-zinc-400 text-lg">No more characters!</p>
-            <p className="text-zinc-500 text-sm mt-2">Add more sources to your selection</p>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
