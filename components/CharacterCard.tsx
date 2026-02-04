@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { ARCHETYPES, CATEGORIES, getArchetypeUrl, getVirtueUrl, type ArchetypeKey, type Category } from '@/lib/archetypes'
 import { WebViewModal } from './WebViewModal'
 
+// Key moments can be either old format (objects) or new format (strings)
+type KeyMoment = { title: string; description: string } | string
+
 interface Character {
   id: string
   name: string
@@ -11,11 +14,29 @@ interface Character {
   archetypes: string[]
   virtues: string[]
   arc_description: string
-  key_moments: { title: string; description: string }[]
+  key_moments: KeyMoment[]
   source: {
     title: string
     category: Category
   }
+}
+
+// Normalize key moments to consistent display format
+function parseKeyMoment(moment: KeyMoment): { title: string; description: string } {
+  if (typeof moment === 'string') {
+    // New format: "Title - Description" or just "Description"
+    const dashIndex = moment.indexOf(' - ')
+    if (dashIndex > 0) {
+      return {
+        title: moment.slice(0, dashIndex),
+        description: moment.slice(dashIndex + 3)
+      }
+    }
+    // No dash, use whole string as description
+    return { title: '', description: moment }
+  }
+  // Old format: already an object
+  return moment
 }
 
 interface CharacterCardProps {
@@ -159,12 +180,15 @@ export function CharacterCard({ character }: CharacterCardProps) {
                 Key Moments
               </h3>
               <ul className="space-y-2">
-                {character.key_moments.map((moment, i) => (
-                  <li key={i} className="text-sm">
-                    <span className="text-white font-medium">{moment.title}:</span>{' '}
-                    <span className="text-zinc-400">{moment.description}</span>
-                  </li>
-                ))}
+                {character.key_moments.map((moment, i) => {
+                  const { title, description } = parseKeyMoment(moment)
+                  return (
+                    <li key={i} className="text-sm">
+                      {title && <span className="text-white font-medium">{title}:</span>}{' '}
+                      <span className="text-zinc-400">{description}</span>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
 
