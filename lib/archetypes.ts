@@ -52,7 +52,7 @@ export const ARCHETYPES = {
   orphan: { name: 'Orphan', color: 'zinc', parent: 'warrior', shadowOf: 'explorer', shadow: 'active', slug: 'orphan' },
   homebody: { name: 'Homebody', color: 'zinc', parent: 'warrior', shadowOf: 'explorer', shadow: 'passive', slug: 'homebody' },
   // Knight shadows
-  loser: { name: 'Loser', color: 'zinc', parent: 'warrior', shadowOf: 'knight', shadow: 'active', slug: 'loser' },
+  critic: { name: 'Critic', color: 'zinc', parent: 'warrior', shadowOf: 'knight', shadow: 'active', slug: 'critic' },
   mercenary: { name: 'Mercenary', color: 'zinc', parent: 'warrior', shadowOf: 'knight', shadow: 'passive', slug: 'mercenary' },
   // Challenger shadows
   asshole: { name: 'Asshole', color: 'zinc', parent: 'warrior', shadowOf: 'challenger', shadow: 'active', slug: 'asshole' },

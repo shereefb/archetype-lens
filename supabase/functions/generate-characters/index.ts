@@ -24,7 +24,7 @@ const VALID_ARCHETYPES = [
   "Tyrant", "Victim", "Rebel", "Bystander", "Judge", "Pushover",
   "Codependent", "Mooch", "Dreamer", "Traditionalist",
   // Warrior shadows
-  "Bully", "Wimp", "Orphan", "Homebody", "Loser", "Mercenary",
+  "Bully", "Wimp", "Orphan", "Homebody", "Critic", "Mercenary",
   "Asshole", "Doormat", "Hustler", "Chump",
   // Magician shadows
   "Manipulator", "Dummy", "Know-it-all", "Consumer", "Infidel",

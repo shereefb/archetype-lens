@@ -74,7 +74,7 @@ Each archetype stands on **two pillar virtues** held in dynamic tension. The mat
 |-----------|----------|----------|---------------|----------------|
 | **Warrior** | Strength | Compassion | Bully | Wimp |
 | **Explorer** | Wanderlust | Belonging | Orphan | Homebody |
-| **Knight** | Honor | Discipline | Loser | Mercenary |
+| **Knight** | Honor | Discipline | Critic | Mercenary |
 | **Challenger** | Confrontation | Acceptance | Asshole | Doormat |
 | **Chief** | Confidence | Humility | Hustler | Chump |
 
@@ -138,7 +138,7 @@ For villains, shadow archetypes should typically come FIRST as they are the domi
 
 **Shadows MUST match their parent archetype.** A shadow can only be used if its parent archetype is also present:
 
-- **Knight** shadows are Loser/Mercenary → If using Mercenary, must also have Knight
+- **Knight** shadows are Critic/Mercenary → If using Mercenary, must also have Knight
 - **Seeker** shadows are Extremist/Blind Follower → If using Blind Follower, must also have Seeker
 - **Caregiver** shadows are Narcissist/Martyr → If using Martyr, must also have Caregiver
 - **Healer** shadows are Charlatan/Wounded Child → If using Charlatan, must also have Healer
