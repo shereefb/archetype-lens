@@ -30,7 +30,7 @@ const VALID_ARCHETYPES = [
   "Manipulator", "Dummy", "Know-it-all", "Consumer", "Infidel",
   "Space Cadet", "Charlatan", "Wounded Child", "Extremist", "Blind Follower",
   // Lover shadows
-  "Addict", "Hermit", "Sellout", "Tortured Artist", "Narcissist",
+  "Addict", "Loner", "Sellout", "Tortured Artist", "Narcissist",
   "Martyr", "Jerk", "Grump", "Seducer", "Rigid Romeo",
 ];
 

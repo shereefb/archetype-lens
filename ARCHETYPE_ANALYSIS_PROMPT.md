@@ -92,7 +92,7 @@ Each archetype stands on **two pillar virtues** held in dynamic tension. The mat
 
 | Archetype | Pillar 1 | Pillar 2 | Active Shadow | Passive Shadow |
 |-----------|----------|----------|---------------|----------------|
-| **Lover** | Passion | Presence | Addict | Hermit |
+| **Lover** | Passion | Presence | Addict | Loner |
 | **Artist** | Performance | Authenticity | Sellout | Tortured Artist |
 | **Caregiver** | Self-Worth | Agape | Narcissist | Martyr |
 | **Trickster** | Mischief | Dignity | Jerk | Grump |

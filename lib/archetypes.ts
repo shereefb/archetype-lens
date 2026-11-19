@@ -79,7 +79,7 @@ export const ARCHETYPES = {
 
   // Lover shadows (main archetype shadows)
   addict: { name: 'Addict', color: 'zinc', parent: 'lover', shadowOf: 'lover', shadow: 'active', slug: 'addict' },
-  hermit: { name: 'Hermit', color: 'zinc', parent: 'lover', shadowOf: 'lover', shadow: 'passive', slug: 'hermit' },
+  loner: { name: 'Loner', color: 'zinc', parent: 'lover', shadowOf: 'lover', shadow: 'passive', slug: 'loner' },
   // Artist shadows
   sellout: { name: 'Sellout', color: 'zinc', parent: 'lover', shadowOf: 'artist', shadow: 'active', slug: 'sellout' },
   tortured_artist: { name: 'Tortured Artist', color: 'zinc', parent: 'lover', shadowOf: 'artist', shadow: 'passive', slug: 'torturedartist' },
